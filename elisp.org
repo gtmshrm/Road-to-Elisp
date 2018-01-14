@@ -6,6 +6,7 @@
 - Can be considered as a REPL and at boot time, the config file gets loaded onto the REPL
 - To get execute any elisp code in say any buffer, it needs to be in ~emacs-elisp-mode~. .el files and scratch buffer are by default in ~emacs-elisp-mode~
 - Any evaluation of elisp expression done manually goes to the same REPL.
+- Using the word symbols instead of variable makes more sense in elisp.
 
 * Note
 + Syntax - Calling a function : (func arg1 arg2 arg3)
@@ -154,7 +155,7 @@ Function to check if something is ~Nil~. Here, nil is obviously equal to nil
 #+RESULTS:
 : t
 
-* Variables
+* Variables (Symbols)
 
 ** ~set~ and ~setq~ - Create global variables
 *** ~set~
