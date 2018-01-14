@@ -1,0 +1,252 @@
+#+TITLE: Road to Elisp
+#+AUTHOR: Gautam Sharma
+
+* Escence of elisp
+
+- Can be considered as a REPL and at boot time, the config file gets loaded onto the REPL
+- To get execute any elisp code in say any buffer, it needs to be in ~emacs-elisp-mode~. .el files and scratch buffer are by default in ~emacs-elisp-mode~
+- Any evaluation of elisp expression done manually goes to the same REPL.
+
+* Note
++ Syntax - Calling a function : (func arg1 arg2 arg3)
++ A variable name could have ~-~
++ True is represented by ~t~ and False by ~nil~
+
+* Functions
+
+** Calculations
+Calling function ~+~ with args 1, 2 and 3
+
+#+BEGIN_SRC elisp
+(+ 1 2 3)
+#+END_SRC
+
+#+RESULTS:
+: 6
+
+** ~message~
+Prints message in mini-buffer
+
+#+BEGIN_SRC elisp
+(message "hello, world!")
+#+END_SRC
+
+#+RESULTS:
+: hello, world!
+
+** ~insert~
+Insert text at point (point means cursor)
+
+#+BEGIN_SRC elisp
+(insert " : inserted text!")
+#+END_SRC
+
+#+RESULTS:
+
+** Lists
+*** Creation
+- ~quote~ means return list (1 2 3)
+
+#+BEGIN_SRC elisp
+(quote (1 2 3))
+#+END_SRC
+
+#+RESULTS:
+| 1 | 2 | 3 |
+
+- ~quote~ can be written as ~'~
+
+#+BEGIN_SRC elisp
+'(1 2 3)
+#+END_SRC
+
+#+RESULTS:
+| 1 | 2 | 3 |
+
+- Nested lists
+
+#+BEGIN_SRC elisp
+'(1 2 (3 4 5) (6 (7)))
+#+END_SRC
+
+#+RESULTS:
+| 1 | 2 | (3 4 5) | (6 (7)) |
+
+*** Manipulation functions
+**** ~car~
+Takes 1st element of list
+
+#+BEGIN_SRC elisp
+(car '(1 2 3))
+#+END_SRC
+
+#+RESULTS:
+: 1
+
+**** ~cdr~
+Takes rest of elements (other than 1st) of list
+
+#+BEGIN_SRC elisp
+(cdr '(1 2 3))
+#+END_SRC
+
+#+RESULTS:
+| 2 | 3 |
+
+**** ~cons~
+Joins an element (element could be anything. even a list) to a lists
+
+  + Simple call
+
+    - ~cons~ treats first arg of list as an element and second as a list
+
+    #+BEGIN_SRC elisp
+    (cons 1 '(2 3))
+    #+END_SRC
+
+    #+RESULTS:
+    | 1 | 2 | 3 |
+
+    - But first arg i.e an element could also be a list
+
+    #+BEGIN_SRC elisp
+    (cons '(1 2) '(3 4))
+    #+END_SRC
+
+    #+RESULTS:
+    | (1 2) | 3 | 4 |
+
+  + Recursive call
+
+    #+BEGIN_SRC elisp
+    (cons 1 (cons 2 (cons 3 '())))
+    #+END_SRC
+
+    #+RESULTS:
+    | 1 | 2 | 3 |
+
+**** ~append~
+Joins two lists. it treats both args as list
+
+#+BEGIN_SRC elisp
+(append '(1 2) '(3 4))
+#+END_SRC
+
+#+RESULTS:
+| 1 | 2 | 3 | 4 |
+
+** ~nil~
+3 lines in snippet mean the same thing i.e ~nil~
+
+#+BEGIN_SRC elisp
+'()
+()
+nil
+#+END_SRC
+
+** ~null~
+Function to check if something is ~Nil~. Here, nil is obviously equal to nil
+
+#+BEGIN_SRC elisp
+(null nil)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* Variables
+
+** ~set~ and ~setq~ - Create global variables
+*** ~set~
+- Function that takes 1st arg as a quoted symbol and 2nd arg as a value and makes that quoted symbol point to that value
+
+#+BEGIN_SRC elisp
+(set 'some-list '(1 2 3))
+#+END_SRC
+
+#+RESULTS:
+| 1 | 2 | 3 |
+
+- Now ~some-list~ points to ~(1 2 3)~
+
+#+BEGIN_SRC elisp
+some-list
+#+END_SRC
+
+#+RESULTS:
+| 1 | 2 | 3 |
+
+*** ~setq~
+- It is same as ~set~ except the fact that it quotes first argument by default
+
+#+BEGIN_SRC elisp
+(setq my-list '(foo bar baz))
+#+END_SRC
+
+#+RESULTS:
+| foo | bar | baz |
+
+#+BEGIN_SRC elisp
+my-list
+#+END_SRC
+
+#+RESULTS:
+| foo | bar | baz |
+
+** ~let~ - Create local variables
+- ~let~ creates a scope within which we can define and use variables
+- Variables declared within ~let~ should not be dependent on any other variable
+- This indicates that scope of variables declared in ~let~ starts outside of declaration block. Here declaration block refers to parenthesis inside which ~a~ and ~b~ are declared
+- Here ~format~ function displays formatted string in mini-buffer
+
+#+BEGIN_SRC elisp
+(let ((a 1)
+      (b 5))
+      (format "a is %d and b is %d" a b))
+#+END_SRC
+
+#+RESULTS:
+: a is 1 and b is 5
+
+** ~let*~ - Create local variables
+- ~let*~ is same as ~let~ except the fact that variables declared within ~let*~ can be dependent on other variables
+- This indicates that scope of variables declared in ~let*~ starts from the point where they are declared
+
+#+BEGIN_SRC elisp
+(let* ((a 1)
+       (b (+ a 5)))
+       (format "a is %d and b is %d" a b))
+#+END_SRC
+
+#+RESULTS:
+: a is 1 and b is 6
+
+* Defining Functions
+
+- Without Args
+
+#+BEGIN_SRC elisp
+(defun say-hello ()
+  (message "hello!"))
+
+(say-hello)
+#+END_SRC
+
+#+RESULTS:
+: hello!
+
+- With Args
+
+#+BEGIN_SRC elisp
+  (defun square (x)
+    (* x x))
+
+  (defun distance (x1 x2 y1 y2)
+    (sqrt (+ (square (- x2 x1))
+             (square (- y2 y1)))))
+
+  (distance 3 0 0 4)
+#+END_SRC
+
+#+RESULTS:
+: 5.0
