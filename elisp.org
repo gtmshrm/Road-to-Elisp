@@ -390,3 +390,69 @@ my-list
 
 #+RESULTS:
 | 0 | 2 | 3 | 4 | 4 | 5 | 5 | 6 | 7 | 7 | 8 | 8 |
+
+* Keybindings
+
+** Set global key binding
+
+#+BEGIN_SRC elisp
+  (global-set-key (kbd "M-#") 'sort-lines)
+#+END_SRC
+
+#+RESULTS:
+: sort-lines
+
+** Major mode in which is currently active
+
+#+BEGIN_SRC elisp
+  major-mode
+#+END_SRC
+
+#+RESULTS:
+: org-mode
+
+** Hooks
+When a hook is added to that mode, the code withing the hook is executed when the corresponding major mode becomes active
+
+#+BEGIN_SRC elisp
+  (add-hook 'c-mode-common-hook
+            (lambda ()
+              (local-key-set (kbd "<f5>") 'recompile)))
+#+END_SRC
+
+* Built-in documentation
+
+** Describe key
+
+#+BEGIN_SRC elisp
+  ;; C-h k
+  (describe-key (kbd "C-h k"))
+#+END_SRC
+
+#+RESULTS:
+: C-h k is undefined
+
+** Apropros command
+Search for commands that match some string.
+
+#+BEGIN_SRC elisp
+  ;; C-h a
+  (apropos-command "region")
+#+END_SRC
+
+#+RESULTS:
+: Type C-w C-o to remove help window.
+
+**
+
+#+BEGIN_SRC elisp
+  ;; C-h f
+  (describe-function 'qs)
+#+END_SRC
+
+#+RESULTS:
+: qs is a Lisp function.
+:
+: (qs ITEMS)
+:
+: Not documented.
