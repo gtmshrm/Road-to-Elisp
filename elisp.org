@@ -1,6 +1,8 @@
 #+TITLE: Road to Elisp
 #+AUTHOR: Gautam Sharma
 
+* [[https://harryrschwartz.com/2014/04/08/an-introduction-to-emacs-lisp.html][Detailed Version]]
+
 * Escence of elisp
 
 - Can be considered as a REPL and at boot time, the config file gets loaded onto the REPL
