@@ -315,3 +315,36 @@ my-list
 
 #+RESULTS:
 : 120
+
+* Anonymous functions
+- What is lambda?
+  + For instance, you can have a variable say ~foo~ and make it point to number ~3~. Eg ~(setq foo 3)~
+  + Here, ~3~ is a number literal i.e value of number
+  + Similarly, in ~(fset 'cube (lambda (x) (* x x x)))~, we have a variable ~cube~ pointing to a lambda
+  + Hence, lambda is a function literal i.e value of function
+
+** ~lambda~
+
+#+BEGIN_SRC elisp
+(lambda (x) (* x x x))
+#+END_SRC
+
+** Creating and calling ~lambda~
+
+#+BEGIN_SRC elisp
+((lambda (x) (* x x x)) 5)
+#+END_SRC
+
+#+RESULTS:
+: 125
+
+** Pointing a variable to ~lambda~ (binding function literal to a variable)
+
+#+BEGIN_SRC elisp
+(fset 'cube (lambda (x) (* x x x)))
+
+(cube 5)
+#+END_SRC
+
+#+RESULTS:
+: 125
