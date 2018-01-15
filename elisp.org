@@ -348,3 +348,25 @@ my-list
 
 #+RESULTS:
 : 125
+
+* Higher order funciton
+** ~mapcr~
+- Mapping functions to a list i.e applying a function n times to n different variables
+- Here, ~upcase~ is an elisp function
+
+#+BEGIN_SRC elisp
+(mapcar 'upcase '("foo" "bar" "baz"))
+#+END_SRC
+
+#+RESULTS:
+| FOO | BAR | BAZ |
+
+** ~remove-if-not~
+- ~remove-if-not~ is similar to ~mapcr~ except that it filters out nil values
+
+#+BEGIN_SRC elisp
+  (remove-if-not 'oddp '(1 2 4 5 7))
+#+END_SRC
+
+#+RESULTS:
+| 1 | 5 | 7 |
