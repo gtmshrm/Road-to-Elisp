@@ -370,3 +370,23 @@ my-list
 
 #+RESULTS:
 | 1 | 5 | 7 |
+
+* Example code: Quicksort
+
+#+BEGIN_SRC elisp
+  (defun qs (items)
+    (if (null items)
+        '()
+      (let* ((pivot (car items))
+             (rest (cdr items))
+             (lesser (remove-if-not
+                      (lambda (x) (<= x pivot)) rest))
+             (greater (remove-if-not
+                       (lambda (x) (> x pivot)) rest)))
+        (append (qs lesser) (list pivot) (qs greater)))))
+
+  (qs '(3 5 7 8 4 2 5 7 0 8 4 6))
+#+END_SRC
+
+#+RESULTS:
+| 0 | 2 | 3 | 4 | 4 | 5 | 5 | 6 | 7 | 7 | 8 | 8 |
