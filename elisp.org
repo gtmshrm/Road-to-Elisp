@@ -11,7 +11,9 @@
 * Note
 + Syntax - Calling a function : (func arg1 arg2 arg3)
 + A variable name could have ~-~
-+ True is represented by ~t~ and False by ~nil~
++ Boolean values
+  - True is conventionally represented by ~t~. Any value other than ~nil~ represents true in elisp
+  - False is conventionally represented by ~nil~. ~()~ and ~'()~ also represent nil
 
 * Functions
 
