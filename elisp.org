@@ -253,3 +253,51 @@ my-list
 
 #+RESULTS:
 : 5.0
+
+* Conditionals
+
+** ~when~
+- It mimics what we know as an if statement in other languages
+
+#+BEGIN_SRC elisp
+  (when (= (+ 2 2) 4)
+    (message "passed sanity check!"))
+#+END_SRC
+
+#+RESULTS:
+: passed sanity check!
+
+** ~if~
+- It mimics what we know as an if-else statement in other languages
+
+  #+BEGIN_SRC elisp
+    (defun even-or-odd (n)
+      (if (= (% n 2) 0)
+          "even"
+        "odd"))
+
+    (even-or-odd 4)
+    (even-or-odd 3)
+  #+END_SRC
+
+  #+RESULTS:
+  : odd
+
+** ~cond~
+- It mimics if-else ladder in other languages
+- Any value other than ~nil~ represents true in elisp but we use ~t~ as a convention
+
+#+BEGIN_SRC elisp
+    (defun pick-a-word (n)
+      (cond
+       ((= n 1) "one")         ;;; if
+       ((= n 2) "two")         ;;; else if
+       ((= n 3) "three")       ;;; else if
+       (t "something else")))  ;;; else
+
+  ;; (pick-a-word 2)
+  (pick-a-word -72)
+#+END_SRC
+
+#+RESULTS:
+: something else
