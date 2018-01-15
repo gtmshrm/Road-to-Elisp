@@ -301,3 +301,17 @@ my-list
 
 #+RESULTS:
 : something else
+
+* Recursion
+
+#+BEGIN_SRC elisp
+  (defun factorial (n)
+    (if (< n 1)
+        1
+      (* n (factorial (- n 1)))))
+
+  (factorial 5)
+#+END_SRC
+
+#+RESULTS:
+: 120
